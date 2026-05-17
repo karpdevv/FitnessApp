@@ -25,4 +25,12 @@ public enum AvailableExercises {
         return exercise;
     }
 
+    public static void showExercises(){
+        AvailableExercises [] exercises=AvailableExercises.values();
+        for (int i=0; i<exercises.length; i++){
+            System.out.printf("%d. %s \n", i+1, exercises[i].getExercise());
+        }
+        System.out.println();
+    }
+
 }

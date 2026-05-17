@@ -12,10 +12,10 @@ public class WorkoutProgram {
     }
 
     public void addExercise(AssignedExercises exercise){
-        exercisesList.add(exercise);
+        getExercisesList().add(exercise);
     }
     public void removeExercise(AssignedExercises exercise){
-        exercisesList.remove(exercise);
+        getExercisesList().remove(exercise);
     }
 
 
@@ -28,12 +28,14 @@ public class WorkoutProgram {
     }
 
     public void printExercisesList(){
-        for (int i=0; i<exercisesList.size(); i++){
-            System.out.printf("%d. %s\n", i+1, exercisesList.get(i).getExerciseName());
+        for (int i = 0; i< getExercisesList().size(); i++){
+            System.out.printf("%d. %s\n", i+1, getExercisesList().get(i).getExerciseName());
         }
     }
 
-
+    public List<AssignedExercises> getExercisesList() {
+        return exercisesList;
+    }
 }
 
 
