@@ -52,35 +52,33 @@ public class Tracker {
     }
 
 
-
     public void printWorkoutExercises() {
         System.out.println("Выберите номер конкретной тренировки для просмотра упражнений");
-        int choice=cin.nextInt() -1;
+        int choice = cin.nextInt() - 1;
         cin.nextLine();
         workoutProgramList.get(choice).printExercisesList();
         System.out.println();
     }
 
 
-
-
-    public void goToWorkout(){
+    public void goToWorkout() {
         printWorkouts();
         int choice;
-        boolean isContinue=true;
-        while (isContinue){
+        boolean isContinue = true;
+        while (isContinue) {
             printGoToWorkoutMenu();
-            choice=cin.nextInt(); cin.nextLine();
-            switch(choice){
+            choice = cin.nextInt();
+            cin.nextLine();
+            switch (choice) {
                 case 1 -> startWorkout();
                 case 2 -> printWorkoutExercises();
-                case 3 -> isContinue=false;
+                case 3 -> isContinue = false;
                 default -> System.out.println("Такого пункта нет в меню");
             }
         }
     }
 
-    public void printGoToWorkoutMenu(){
+    public void printGoToWorkoutMenu() {
         System.out.println("Выберите дальнейшие действия: \n" +
                 "1. Начать тренировку\n" +
                 "2. Просмотр упражнений в программе\n" +
@@ -93,7 +91,7 @@ public class Tracker {
         } else {
             System.out.println("Доступны следующие тренировки:");
             for (int i = 0; i < workoutProgramList.size(); i++) {
-                System.out.printf("%d.%s\n",i+1, workoutProgramList.get(i).getWorkoutName());
+                System.out.printf("%d.%s\n", i + 1, workoutProgramList.get(i).getWorkoutName());
             }
         }
         System.out.println();
@@ -103,10 +101,11 @@ public class Tracker {
         System.out.println("Выберите номер тренировки");
         int choice = cin.nextInt();
         cin.nextLine();
-        List<AssignedExercises> exercises = workoutProgramList.get(choice - 1).getExercisesList();
+        WorkoutProgram currentWorkout = workoutProgramList.get(choice - 1);
+        List<AssignedExercises> exercises = currentWorkout.getExercisesList();
         for (int i = 0; i < exercises.size(); i++) {
             for (int j = 0; j < exercises.get(i).getPlannedSets(); j++) {
-                System.out.println("Подход: " + j + 1);
+                System.out.println("Подход: " + (j + 1));
                 System.out.println("Упражнение: " + exercises.get(i).getExerciseName());
                 System.out.println("Количество повторений: " + exercises.get(i).getPlannedRepetitions());
                 System.out.println("Вес: " + exercises.get(i).getWeight());
@@ -120,8 +119,20 @@ public class Tracker {
             }
         }
         System.out.println("Поздравляю! Тренировка завершена");
+        WorkoutSession history = new WorkoutSession(currentWorkout);
+        workoutSessions.add(history);
+    }
 
 
+    public void printLastWorkout() {
+        if (workoutSessions.isEmpty()){
+            System.out.println("У Вас еще не было тренировок");
+        }
+        else {
+            workoutSessions.get(workoutSessions.size() - 1).printWorkoutHistory();
+            System.out.println();
+        }
     }
 }
+
 

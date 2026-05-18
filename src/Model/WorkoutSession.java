@@ -1,14 +1,34 @@
 package Model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class WorkoutSession {
-    LocalDate date=LocalDate.now();
+    private LocalDate date;
+    private List<String> workoutsHistory=new ArrayList<>();
+    private String programName;
 
-    //передавать сюда всю тренировку из tracker (startWorkout)
-    //после этого
-    //сделать массив строк, в который буду просто добавлять
-    //в каждый элемент информацию о тренировке (название+подходы и т.д.)
+    public WorkoutSession(WorkoutProgram workout){
+        this.date=LocalDate.now();
+        this.programName=workout.getWorkoutName();
+        for (int i=0; i<workout.getExercisesList().size(); i++){
+            AssignedExercises exercises =workout.getExercisesList().get(i);
+            String info="Упражнение: " + exercises.getExerciseName() + " "
+                    + exercises.getWeight()
+                    + " кг " + exercises.getActualRepetitions().size() + " подхода по "
+                    + exercises.getActualRepetitions() + " повторений";
 
+            workoutsHistory.add(info);
+        }
+    }
+
+    public void printWorkoutHistory() {
+        System.out.println("Тренировка: " + programName);
+        System.out.println(date + " ");
+        for (int i=0; i<workoutsHistory.size(); i++){
+            System.out.println(workoutsHistory.get(i));
+        }
+    }
 }

@@ -1,6 +1,7 @@
 import Model.AssignedExercises;
 import Model.AvailableExercises;
 import Model.WorkoutProgram;
+import Model.WorkoutSession;
 import Service.Tracker;
 
 import java.util.ArrayList;
@@ -27,9 +28,6 @@ public class Main {
 
 
 
-
-
-
     public static void runMenu(){
         boolean exit=true;
         Tracker tracker=new Tracker();
@@ -42,6 +40,7 @@ public class Main {
                 case 1 -> AvailableExercises.showExercises();
                 case 2 -> tracker.createWorkout();
                 case 3 -> tracker.goToWorkout();
+                case 4 -> tracker.printLastWorkout();
                 case 5 -> {
                     exit=false;
                     System.out.println("Всего доброго, до свидания!");
